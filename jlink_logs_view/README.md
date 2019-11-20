@@ -24,9 +24,8 @@ Opens the jlink client with appropriate debbuger id and some RTT port
 
 # How to use
 For single debbuger you do not have to pass any argument
-Enter `jlink_server` command in one terminal and `jlink_client` in another terminal
+Enter `jlink_server` command in one terminal and `jlink_client` in another terminal. For multiple debbugers run with the argument
 
-For multiple debbugers run with the argument
 `jlink_server 0` and `jlink_client 0`
 
 `jlink_server 1` and `jlink_client 1`
