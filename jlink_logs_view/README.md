@@ -16,10 +16,12 @@ Opens the jlink client with appropriate debbuger id and some RTT port
 ## Start Server
 
 `jlink_server h                        -- Shows help`
+
 `jlink_server [ 0 | 1 | 2 | 3 | 4 ]    -- Use any one parameter with it`
 
 ## Start Client
 `jlink_client h                        -- Shows help`
+
 `jlink_client [ 0 | 1 | 2 | 3 | 4 ]    -- Use any one parameter with it`
 
 # How to use
