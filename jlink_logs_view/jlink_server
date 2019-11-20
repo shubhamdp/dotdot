@@ -1,0 +1,96 @@
+#!/bin/bash
+# @file: jlink_client
+# Copyrights (C) 2019, Shubham Patil <shubhampatil.patil@gmail.com>
+#
+
+source jlink_common
+
+# Array to store debugger IDs
+IDs=()
+
+# Fill IDs array with debugger IDs
+fill_id_in_array()
+{
+	id_count=$#
+
+	local i=0
+
+	for id in $@
+	do
+		IDs[$i]=$id
+		i=$(( i+1 ))
+	done
+}
+
+fill_ids()
+{
+	local ids=`nrflist`
+
+	if [[ $ids ]];
+	then
+		fill_id_in_array $ids
+	else
+		echo "No debugger connected to the PC"
+		return 1
+	fi
+	return 0
+}
+
+validate_args()
+{
+	if ! (is_number $1)
+	then
+		return 1
+	fi
+
+	if ! (fill_ids)
+	then
+		return 2
+	fi
+
+	if [ $1 -lt ${#IDs[*]} ] && [ $1 -lt ${#RTTPORT[*]} ]
+	then
+		return 0
+	else
+		return 1
+	fi
+}
+
+cmd_run()
+{
+	jlink-server -SelectEmuBySN ${IDs[$1]} -RTTTelnetPort ${RTTPORT[$1]}
+}
+
+jlink_server()
+{
+	validate_args $1
+	local rc=$?
+	
+	if [ $rc -eq 0 ]
+	then
+		cmd_run $1
+	elif [ $rc -eq 2 ]
+	then
+		return 0
+	else
+		show_help
+		return 1
+	fi
+}
+
+# TODO: convert to switch case 
+main()
+{
+	if [ $# -eq 0 ]
+	then
+		jlink_server 0
+	elif [ $# -eq 1 ]
+	then
+		jlink_server $1
+	else
+		show_help
+	fi
+}
+
+main $@
+

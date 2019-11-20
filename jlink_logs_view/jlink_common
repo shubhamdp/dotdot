@@ -1,0 +1,50 @@
+#!/bin/bash
+##
+# @file: jlink_client
+# Copyrights (C) 2019, Shubham Patil <shubhampatil.patil@gmail.com>
+#
+
+shopt -s expand_aliases
+
+alias nrflist='nrfjprog -i'
+alias nrferase='nrfjprog -f nrf52 --eraseall'
+alias nrfprogram='nrfjprog -f nrf52 --program'
+alias nrfreset='nrfjprog -f nrf52 --reset' 
+
+alias jlink-server='JLinkExe -device NRF52 -if SWD -speed 4000 -autoconnect 1'
+alias jlink-client='JLinkRTTClientExe'
+
+RTTPORT=(12345 12346 12347 12348 12349)
+
+is_number()
+{
+	local re='^[0-9]+$'
+	if ! [[ $1 =~ $re ]] ; then
+		return 1
+	else
+		return 0
+	fi
+
+}
+
+show_help()
+{
+	echo "Usage"
+	echo "    $0 h                        -- Shows help"
+	echo -n "    $0 [ "
+	
+	local i=0
+	while [ $i -lt ${#RTTPORT[*]} ]
+	do
+		if [ $i -eq 0 ]
+		then
+			echo -n "$i"
+		else
+			echo -n " | $i"
+		fi
+		i=$(( $i+1 ))
+	done
+
+	echo " ]    -- Use any one parameter with it"
+}
+

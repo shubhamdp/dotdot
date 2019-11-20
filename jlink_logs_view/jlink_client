@@ -1,0 +1,55 @@
+#!/bin/bash
+#
+# @file: jlink_client
+# Copyrights (C) 2019, Shubham Patil <shubhampatil.patil@gmail.com>
+#
+
+source jlink_common
+
+validate_args()
+{
+	if ! (is_number $0)
+	then
+		return 1
+	fi
+
+	if [ $1 -lt ${#RTTPORT[*]} ]
+	then
+		return 0
+	else
+		return 1
+	fi
+}
+
+cmd_run()
+{
+	jlink-client -RTTTelnetPort ${RTTPORT[$1]}
+}
+
+jlink_client()
+{
+	if (validate_args $1)
+	then
+		cmd_run $1
+	else
+		show_help
+		return 1
+	fi
+}
+
+# TODO: convert to switch case 
+main()
+{
+	if [ $# -eq 0 ]
+	then
+		jlink_client 0
+	elif [ $# -eq 1 ]
+	then
+		jlink_client $1
+	else
+		show_help
+	fi
+}
+
+main $@
+
