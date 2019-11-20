@@ -5,47 +5,37 @@
 
 source jlink_common
 
+DBG_FLAG=0
 # Array to store debugger IDs
 IDs=()
 
-# Fill IDs array with debugger IDs
-fill_id_in_array()
+log_debug()
 {
-	id_count=$#
-
-	local i=0
-
-	for id in $@
-	do
-		IDs[$i]=$id
-		i=$(( i+1 ))
-	done
-}
-
-fill_ids()
-{
-	local ids=`nrflist`
-
-	if [[ $ids ]];
+	if [ $DBG_FLAG -eq 1 ]
 	then
-		fill_id_in_array $ids
-	else
-		echo "No debugger connected to the PC"
-		return 1
+		echo $@
 	fi
-	return 0
 }
 
 validate_args()
 {
 	if ! (is_number $1)
 	then
+		log_debug "$1 not a number"
 		return 1
 	fi
 
-	if ! (fill_ids)
+	local id_output=`nrflist`
+
+	if [[ $id_output ]];
 	then
-		return 2
+		for id in $id_output
+		do
+			IDs+=( $id )
+		done
+	else
+		echo "No debugger connected to the PC"
+		return 1
 	fi
 
 	if [ $1 -lt ${#IDs[*]} ] && [ $1 -lt ${#RTTPORT[*]} ]
