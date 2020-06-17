@@ -29,9 +29,10 @@ is_number()
 
 show_help()
 {
+	app=$(basename $0)
 	echo "Usage"
-	echo "    $0 h                        -- Shows help"
-	echo -n "    $0 [ "
+	echo "    $app h                        -- Shows help"
+	echo -n "    $app [ "
 	
 	local i=0
 	while [ $i -lt ${#RTTPORT[*]} ]
