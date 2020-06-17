@@ -8,7 +8,7 @@ source jlink_common
 
 validate_args()
 {
-	if ! (is_number $1)
+	if ! is_number $1
 	then
 		return 1
 	fi
@@ -28,7 +28,7 @@ cmd_run()
 
 jlink_client()
 {
-	if (validate_args $1)
+	if validate_args $1
 	then
 		cmd_run $1
 	else

@@ -17,14 +17,8 @@ log_debug()
 	fi
 }
 
-validate_args()
+fill_ids()
 {
-	if ! (is_number $1)
-	then
-		log_debug "$1 not a number"
-		return 1
-	fi
-
 	local id_output=`nrflist`
 
 	if [[ $id_output ]];
@@ -36,6 +30,20 @@ validate_args()
 	else
 		echo "No debugger connected to the PC"
 		return 1
+	fi
+}
+
+validate_args()
+{
+	if ! is_number $1
+	then
+		log_debug "$1 not a number"
+		return 1
+	fi
+
+	if ! fill_ids
+	then
+		return 2
 	fi
 
 	if [ $1 -lt ${#IDs[*]} ] && [ $1 -lt ${#RTTPORT[*]} ]
