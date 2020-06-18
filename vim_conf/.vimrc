@@ -31,6 +31,7 @@ filetype plugin indent on    " required
 
 set shell=/bin/bash
 
+" traverse tags in parent directory
 set tags=tags;/
 
 set hlsearch
@@ -51,14 +52,23 @@ if has("autocmd")
 	\| exe "normal! g'\"" | endif
 endif
 
-" navigate to next tab using (ALT + Left arrow)
-nmap <Esc>[1;3C :tabn<CR>
-" navigate to prev tab using (ALT + Right arrow)
-nmap <Esc>[1;3D :tabp<CR>
+" navigate to next tab using (ALT + [)
+" nmap <Esc>[ :tabn<CR>
+" navigate to prev tab using (ALT + ])
+" nmap <Esc>] :tabp<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap ht  :split<Space>
+nnoremap vt  :vsplit<Space>
 
 source /home/shubham/.vim/plugins/cscope_maps.vim
 source /home/shubham/.vim/plugins/fzf.vim
 
 " map ALT + f for opening selected file in new tab
 nmap <Esc>f :call fzf#run({'sink': 'tabedit', 'down': '40%'})<CR>
+nmap <Esc>hf :call fzf#run({'sink': 'split', 'down': '40%'})<CR>
+nmap <Esc>vf :call fzf#run({'sink': 'vsplit', 'down': '40%'})<CR>
 
+" F8 to highlight words under curser
+:nnoremap <F9> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+
+set backspace=indent,eol,start
