@@ -1,2 +1,2 @@
-# linux_setup
-My linux setup files
+# dotdot
+Collection of dot files
