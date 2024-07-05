@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/private/tmp/com.apple.launchd.Jramgxipxs'
+let g:netrw_dirhist_9='/Users/shubhampatil/esp/connectedhomeip/scripts/tools'
+let g:netrw_dirhist_8='/Users/shubhampatil/esp/connectedhomeip/scripts'
+let g:netrw_dirhist_7='/Users/shubhampatil/esp/connectedhomeip/scripts/tools'
+let g:netrw_dirhist_6='/Users/shubhampatil/esp/esp-matter/components/esp_matter'
+let g:netrw_dirhist_5='/Users/shubhampatil/esp/esp-matter/components/esp_matter/zap_common'
+let g:netrw_dirhist_4='/Users/shubhampatil/esp/esp-matter/components/esp_matter'
+let g:netrw_dirhist_3='/Users/shubhampatil/.config/nvim'
+let g:netrw_dirhist_2='/Users/shubhampatil/esp/connectedhomeip/.github/actions/checkout-submodules-and-bootstrap'
+let g:netrw_dirhist_1='/Users/shubhampatil/Desktop/long-duration-logs/logs'

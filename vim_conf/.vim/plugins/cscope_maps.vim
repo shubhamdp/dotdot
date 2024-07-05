@@ -38,7 +38,6 @@ if has("cscope")
     set csto=0
 
     " add any cscope database in current directory
-    set nocscopeverbose
     if filereadable("cscope.out")
         cs add cscope.out  
     " else add the database pointed to by environment variable 
@@ -47,7 +46,7 @@ if has("cscope")
     endif
 
     " show msg when any other cscope db added
-    " set cscopeverbose  
+    set cscopeverbose  
 
 
     """"""""""""" My cscope/vim key mappings
